@@ -94,6 +94,18 @@
       font-weight:var(--nav-weight,500);
     }
 
+    /* Einheitlicher Look für alle Menü-Elemente – auch Buttons */
+    .menu>li>a, .menu>li>button,
+    .menu-overflow li a, .menu-overflow li button,
+    .has-mobile-flyout > button {
+      color:var(--text);               /* gleiche Textfarbe wie Links */
+      background:var(--panel);         /* identischer Hintergrund */
+      border:1px solid var(--border);  /* gleiche Rahmenfarbe */
+      border-radius:12px;
+      padding:10px 12px;
+      appearance:none;                 /* native Button-Stile entfernen */
+    }
+
     /* Overflow-Panel direkt UNTER dem Header */
     .menu-overflow{
       position:fixed; left:0; right:0; z-index:40;
@@ -591,6 +603,7 @@
   </script>
 </body>
 </html>
+
 
 
 
