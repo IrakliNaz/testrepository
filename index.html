@@ -86,10 +86,26 @@
       width:100%; display:flex; justify-content:space-between;
       padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:var(--panel);
     }
-    .menu-overflow .dropdown{ position:static; display:block; border:none; padding:0; background:transparent; box-shadow:none; margin:0; }
-    .menu-overflow .dropdown a{ padding:10px 12px }
 
-    /* Mobiles Flyout-Dropdown für "Leistungen" (ohne Header zu vergrößern) */
+    /* Dropdowns im Overflow-Panel: statisch/vertikal */
+    .menu-overflow .has-mobile-flyout .dropdown{
+      position:static;
+      display:none;              /* per .open toggeln */
+      border:none;
+      padding:0;
+      margin:0;
+      background:transparent;
+      box-shadow:none;
+    }
+    .menu-overflow .has-mobile-flyout.open .dropdown{ display:block; }
+    .menu-overflow .has-mobile-flyout .dropdown a{
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:var(--panel);
+    }
+
+    /* Mobiles Flyout-Dropdown für "Leistungen" im Header (ohne Header zu vergrößern) */
     @media (max-width:820px){
       .has-mobile-flyout .dropdown{
         position:fixed;
@@ -103,12 +119,8 @@
         padding:6px 8px;
         background:var(--panel);
       }
-      .has-mobile-flyout.open .dropdown{ display:block; }
-      .has-mobile-flyout .dropdown a{
-        display:flex; gap:10px; align-items:center;
-        padding:10px 12px; border-radius:12px;
-        border:1px solid var(--border); background:var(--panel);
-      }
+      /* Nur wenn die LI im Header steht, nicht im Overflow-Panel */
+      nav > .menu > .has-mobile-flyout.open > .dropdown{ display:block; }
     }
 
     /* Body scroll sperren, wenn Overflow oder Flyout offen (optional) */
@@ -420,8 +432,6 @@
 
     if(firstOverflowIndex >= 0){
       for(let i=firstOverflowIndex;i<items.length;i++){
-        // Optional: "Leistungen" nicht verschieben
-        if(items[i].id === 'nav-services') continue;
         overflowList.appendChild(items[i]);
       }
     }
