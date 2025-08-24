@@ -62,14 +62,36 @@
 
     /* Hamburger */
     .hamburger{display:none}
-
+    
     @media (max-width:820px){
       .hamburger{
-        display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:12px;
-        border:1px solid var(--border);background:var(--panel)
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:10px 12px;
+        border-radius:12px;
+        border:1px solid var(--border);
+        background:var(--panel);
+    
+        /* >> Einheitliche Schrift wie bei den Links/Buttons */
+        font-family:inherit;
+        font-size:var(--nav-font-size,15px);
+        line-height:var(--nav-line,1.25);
+        font-weight:var(--nav-weight,500);
       }
-      /* Hover-Öffnen abschalten, wir steuern mobil per Klick */
-      .menu>li:hover .dropdown{ display:none; }
+
+        /* Hover-Öffnen abschalten, mobil per Klick */
+        .menu>li:hover .dropdown{ display:none; }
+      }
+
+    .hamburger,
+    .menu>li>a, .menu>li>button,
+    .menu-overflow li a, .menu-overflow li button,
+    .has-mobile-flyout .dropdown a{
+      font-family:inherit;
+      font-size:var(--nav-font-size,15px);
+      line-height:var(--nav-line,1.25);
+      font-weight:var(--nav-weight,500);
     }
 
     /* Overflow-Panel direkt UNTER dem Header */
@@ -569,4 +591,5 @@
   </script>
 </body>
 </html>
+
 
