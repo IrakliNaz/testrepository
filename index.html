@@ -10,7 +10,7 @@
       --panel:#ffffff;     /* Karten / Boxen weiß */
       --card:#ffffff;
       --border:#d1d5db;    /* hellgraue Rahmen */
-      --text:#374151;      /* Haupttext: dunkles Navy (wie im Logo) */
+      --text:#374151;      /* Haupttext (dunkles Grau/Navy) */
       --muted:#e5e7eb;     /* Grautöne für Nebeninfos */
       --brand:#22d3ee;     /* Türkis aus Logo */
       --brand-2:#14b8a6;   /* Teal */
@@ -24,6 +24,9 @@
       color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
     }
+    /* weiches Scrollen */
+    html { scroll-behavior: smooth; }
+
     a{color:inherit;text-decoration:none}
     .container{max-width:1100px;margin-inline:auto;padding:24px}
 
@@ -32,17 +35,12 @@
       position:sticky;
       top:0;
       z-index:50;
-      background:rgba(203, 213, 225, 0.9);
+      background:rgba(209,213,219,0.95); /* neutrales Hellgrau (#d1d5db) ohne Blaustich */
       backdrop-filter:saturate(140%) blur(12px);
       border-bottom:1px solid var(--border)
     }
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px;font-weight:700}
-    .brand .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:conic-gradient(from 180deg,var(--brand),var(--brand-2),var(--brand));
-      box-shadow:0 0 0 3px #0b1220
-    }
 
     .menu{display:flex;align-items:center;gap:8px}
     .menu>li{list-style:none;position:relative}
@@ -58,10 +56,10 @@
     .dropdown{
       position:absolute;top:100%;left:0;min-width:260px;
       background:var(--panel);border:1px solid var(--border);border-radius:14px;
-      padding:4px;margin-top:0;display:none;box-shadow:0 10px 30px rgba(0,0,0,.35)
+      padding:4px;margin-top:0;display:none;box-shadow:0 10px 30px rgba(0,0,0,.12)
     }
     .dropdown a{display:flex;gap:10px;align-items:start;padding:10px;border-radius:10px;color:var(--text)}
-    .dropdown a:hover{background:#0a1627}
+    .dropdown a:hover{background:var(--muted);}
     .menu>li:focus-within .dropdown,.menu>li:hover .dropdown{display:block}
 
     /* Mobile */
@@ -80,8 +78,9 @@
     }
 
     /* Sections & Hero */
-    section{scroll-margin-top:96px}
-    .hero-img{width:100%;height:280px;border-radius:18px;object-fit:cover;margin-bottom:20px}
+    section{scroll-margin-top:80px;}  /* Platz für den sticky Header */
+    #home { scroll-margin-top:0;}     /* Home wirklich ganz oben */
+    .hero-img{width:100%;height:auto;object-fit:cover;margin-bottom:20px}
     .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:24px}
     h1{font-size:clamp(28px,5vw,44px);line-height:1.1;margin:12px 0 8px}
     h2{font-size:clamp(22px,4vw,32px);margin:0 0 16px}
@@ -95,21 +94,23 @@
     }
 
     /* Footer */
-    footer{padding:24px 0;color:var(--muted)}
-    footer a{color:var(--muted)}
-    footer a:hover{text-decoration:underline}
+    footer{padding:24px 0;color:var(--text);}
+    footer a{color:var(--text);}
+    footer a:hover {color:var(--brand); text-decoration:underline;}
 
     /* Pages via Router */
     .page{display:none}
     .page.active{display:block}
   </style>
+
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="brand" aria-label="Startseite">
-        <div class="logo" aria-hidden="true"></div>
-        <span>Eucasia</span>
+        <a href="#home" id="logo-link">
+          <img src="images/Logo.png" alt="Eucasia Logo" style="height:80px; width:auto;">
+        </a>
       </div>
       <nav id="mainnav" aria-expanded="false">
         <button class="hamburger" aria-controls="menu" aria-label="Menü umschalten" onclick="toggleMenu()">☰ Menü</button>
@@ -133,10 +134,9 @@
   <main class="container">
     <!-- Home -->
     <section id="home" class="page active">
-      <img class="hero-img" src="https://github.com/IrakliNaz/testrepository/blob/main/CompanyLogo.png" alt="Eucasia Logo">
+      <img class="hero-img" src="images/home_bild.jpg" alt="Eucasia Logo">
       <div class="card">
         <h1>Willkommen bei Eucasia</h1>
-        <h2>- Connecting Europe, Caucasus & Asia -</h2>
         <p>Wir bündeln Bestellungen aus dem Nicht-EU-Ausland, übernehmen Einkauf und liefern Ihre Ware sicher, termingerecht und kosteneffizient – alles aus einer Hand.</p>
         <section id="home_benefits"><h3>Was Sie erwartet</h3>
           <ul>
@@ -171,10 +171,10 @@
 
     <!-- Über uns -->
     <section id="about" class="page">
-      <img class="hero-img" src="https://source.unsplash.com/1600x500/?team,business" alt="Über uns">
+      <img class="hero-img" src="images/ueber_uns_bild.png" alt="Über uns">
       <div class="card"><h1>Wer sind wir?</h1>
         <h2>- Inhabergeführt, persönlich, zuverlässig -</h2>
-        <p>Wir machen internationalen Handel einfach: Als spezialisiertes Import-/Exportunternehmen bündeln wir Bestellungen aus dem Nicht-EU-Ausland und bringen Ihre Produkte sicher und wirtschaftlich zu Ihnen. Dabei verbinden wir persönliche Betreuung mit einem belastbaren Netzwerk aus geprüften Lieferanten und Speditionen.</p>
+        <p>Als spezialisiertes Import-/Exportunternehmen bündeln wir Bestellungen aus dem Nicht-EU-Ausland und bringen Ihre Produkte sicher und wirtschaftlich zu Ihnen. Dabei verbinden wir persönliche Betreuung mit einem belastbaren Netzwerk aus geprüften Lieferanten und Speditionen.</p>
         <section id="about_mission"><h3>Unsere Mission</h3>
           <ul>
             <li><strong>Komplexität reduzieren:</strong> Wir übernehmen Einkauf, Logistik und Formalitäten.</li>
@@ -203,7 +203,7 @@
 
     <!-- Leistungen: Einkauf -->
     <section id="leistung-einkauf" class="page">
-      <img class="hero-img" src="https://source.unsplash.com/1600x500/?retail,shopping" alt="Einkauf">
+      <img class="hero-img" src="images/einkauf_bild.jpg" alt="Einkauf">
       <div class="card">
         <section id="Leistung_Einkauf">
           <h2>Einkauf</h2>
@@ -221,7 +221,7 @@
 
     <!-- Leistungen: Produktvielfalt -->
     <section id="leistung-produkt" class="page">
-      <img class="hero-img" src="https://source.unsplash.com/1600x500/?brands,products" alt="Produktvielfalt">
+      <img class="hero-img" src="images/produktvielfalt_bild.jpg" alt="Produktvielfalt">
       <div class="card">
         <section id="Leistung_Produktvielfalt">
           <h2>Produktvielfalt</h2>
@@ -239,7 +239,7 @@
 
     <!-- Leistungen: Lieferung -->
     <section id="leistung-lieferung" class="page">
-      <img class="hero-img" src="https://source.unsplash.com/1600x500/?logistics,warehouse" alt="Lieferung">
+      <img class="hero-img" src="images/lieferung_bild.png" alt="Lieferung">
       <div class="card">
         <section id="Leistung_Lieferung">
           <h2>Lieferung</h2>
@@ -313,29 +313,79 @@
     </div>
   </footer>
 
-  <script>
-    function toggleMenu(){
+ <script>
+  function toggleMenu(){
+    const nav=document.getElementById('mainnav');
+    const expanded=nav.getAttribute('aria-expanded')==='true';
+    nav.setAttribute('aria-expanded', String(!expanded));
+  }
+
+  function route(targetId){
+    const id = (targetId || (location.hash || '#home').replace('#',''));
+    document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+    const target = document.getElementById(id) || document.getElementById('home');
+    target.classList.add('active');
+  }
+
+function scrollToSection(id){
+  const header = document.querySelector('header');
+  const headerH = header ? header.offsetHeight : 0;
+
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  // Top-Padding der umgebenden main.container berücksichtigen
+  const container = document.querySelector('main.container');
+  const padTop = container ? parseFloat(getComputedStyle(container).paddingTop) || 0 : 0;
+
+  // Zielposition berechnen: Element-Top minus Headerhöhe minus Container-Padding
+  const targetY = id === 'home'
+    ? 0
+    : el.getBoundingClientRect().top + window.pageYOffset - headerH - padTop;
+
+  window.scrollTo({ top: targetY, left: 0, behavior: 'smooth' });
+}
+
+  function navigateTo(id){
+    // Hash immer neu setzen, auch wenn er gleich ist
+    if (location.hash !== '#' + id) {
+      location.hash = '#' + id;
+    }
+    route(id);
+    scrollToSection(id);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    // Initial
+    document.getElementById('year').textContent = new Date().getFullYear();
+    route((location.hash || '#home').replace('#',''));
+    scrollToSection((location.hash || '#home').replace('#',''));
+
+    // Delegation: klicke auf ALLE internen Links (#...)
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+
+      const id = a.getAttribute('href').replace('#','').trim();
+      if (!id) return;
+
+      e.preventDefault();
+      navigateTo(id);
+
+      // Mobile-Menü nach Klick schließen
       const nav=document.getElementById('mainnav');
-      const expanded=nav.getAttribute('aria-expanded')==='true';
-      nav.setAttribute('aria-expanded',String(!expanded));
-    }
-    function route(){
-      const hash=(location.hash||'#home').replace('#','');
-      document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
-      const target=document.getElementById(hash);
-      (target||document.getElementById('home')).classList.add('active');
-    }
-    window.addEventListener('hashchange',route);
-    window.addEventListener('DOMContentLoaded',()=>{
-      route();
-      document.getElementById('year').textContent=new Date().getFullYear();
+      if (nav && nav.getAttribute('aria-expanded')==='true') {
+        nav.setAttribute('aria-expanded','false');
+      }
     });
-  </script>
+
+    // Hash-Änderungen (z. B. Back/Forward)
+    window.addEventListener('hashchange', () => {
+      const id = (location.hash || '#home').replace('#','');
+      route(id);
+      scrollToSection(id);
+    });
+  });
+</script>
 </body>
 </html>
-
-
-
-
-
-
